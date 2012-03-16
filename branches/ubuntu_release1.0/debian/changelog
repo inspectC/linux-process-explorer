@@ -1,0 +1,5 @@
+procexp (1.0-0ubuntu1) precise; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Carl Wolff <carl@wolff-online.nl>  Thu, 15 Mar 2012 22:10:05 +0100
