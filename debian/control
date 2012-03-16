@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Carl Wolff <carl@wolff-online.nl>
 Build-Depends: debhelper (>= 8.0.0),  python-support (>= 0.90)
 Standards-Version: 3.9.2
-Homepage: http://www.sourceforge.net/projects/procexp
+Homepage: http://www.sourceforge.net/apps/mediawiki/procexp/index.php?title=Main_Page
 
 Package: procexp
 Architecture: any
