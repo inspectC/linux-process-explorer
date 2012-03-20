@@ -1,3 +1,4 @@
+find . -name "*.pyc"|xargs rm -f 
 SVNVERSION=`svnversion`
 
 echo "procexp (1.0.$SVNVERSION-0ubuntu1) precise; urgency=low
