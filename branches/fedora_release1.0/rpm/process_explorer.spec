@@ -65,22 +65,8 @@ fi
 rm -f ../../*.rpm
 
 #unpack prerequisites for the process explorer
-curdir=`pwd`
-cd ../..
-tar -xf localsmall.tar.gz
-cd $curdir
-
-for file in ../../* ; do
-  if [ "$file" != "../../rpm" ] && [ "$file" != "../../localsmall.tar.gz" ] && [ "$file" != "../../make_rpm.py" ] && [ "$file" != "../../process_explorer.spec" ] ; then 
-    cp -a $file $RPM_BUILD_ROOT/opt/%{_projectname}-%{version}-%{release}
-    echo $file
-    echo "-----"
-  fi
-done
-
-rm -rf ../../bin
-rm -rf ../../lib
-rm -rf ../../qt-453
+pwd
+cp -a ../../../procexp $RPM_BUILD_ROOT/opt/%{_projectname}-%{version}-%{release}
 
 
 ###############################################################################
@@ -99,21 +85,7 @@ rm -rf ../../qt-453
 ###############################################################################
 %post
 
-#install startup script
-
-cat > /opt/%{_projectname}-%{version}-%{release}/processexplorer.sh << __EOF
-#startup script for process explorer
-PREFIX=/opt/%{_projectname}-%{version}-%{release}
-export PATH=\$PREFIX/bin:\$PREFIX/qt-453/bin:\$PATH
-export LD_LIBRARY_PATH=\$PREFIX/lib:\$PREFIX/qt-453/lib:\$LD_LIBRARY_PATH
-export QTDIR=\$PREFIX/qt-453
-export QTLIB=\$PREFIX/qt-453/lib
-export QTINC=\$PREFIX/qt-453/include
-\$PREFIX/bin/python /opt/%{_projectname}-%{version}-%{release}/procexp.py
-__EOF
-
-chmod +x /opt/%{_projectname}-%{version}-%{release}/processexplorer.sh
-ln -s /opt/%{_projectname}-%{version}-%{release}/processexplorer.sh /usr/bin/procexp
+ln -s /opt/%{_projectname}-%{version}-%{release}/procexp.py /usr/bin/procexp
 
 ###############################################################################
 %postun
