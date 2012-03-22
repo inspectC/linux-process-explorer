@@ -2,7 +2,7 @@
 Name=Linux Process Explorer
 GenericName=System monitoring tool
 Comment=Start the Linux Process Explorer
-Exec=procexp
+Exec=procexp.sh
 Icon=/usr/share/icons/procexp/icon.png
 Terminal=false
 Type=Application
