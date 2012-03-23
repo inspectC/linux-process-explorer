@@ -50,7 +50,7 @@ pwd = os.getcwd()
 #Create RPM 'environment'
 #
 subprocess.check_call(["/bin/rm", "-rf", "./rpm"])
-subprocess.check_call(["/bin/rm", "-rf", "./i386"])
+subprocess.check_call(["/bin/rm", "-rf", "./noarch"])
 os.mkdir("./rpm")
 os.mkdir("./rpm/BUILD")
 os.mkdir("./rpm/RPMS")
@@ -71,9 +71,9 @@ subprocess.check_call(["rpmbuild",
 
 #   "--define", "_pythonpath "  + createFullPath(pythonpath),
 
-subprocess.check_call(["mv", pwd + '/rpm/RPMS/i386/'+projectname + '-' + versionprefix + '-' + svnversion + ".i386.rpm", "."])
+subprocess.check_call(["mv", pwd + '/rpm/RPMS/noarch/'+projectname + '-' + versionprefix + '-' + svnversion + ".noarch.rpm", "."])
 
 print "********************************************"
-print "RPM file is : " + pwd + '/rpm/RPMS/i386/'+projectname + '-' + versionprefix + '-' + svnversion + ".i386.rpm"
+print "RPM file is : " + pwd + '/rpm/RPMS/noarch/'+projectname + '-' + versionprefix + '-' + svnversion + ".noarch.rpm"
 print "********************************************"
     
