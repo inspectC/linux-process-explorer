@@ -25,9 +25,13 @@ License: GPL
 Group: System Environment/Libraries
 BuildRoot: %{_builddir}
 Packager: Carl.Wolff
+URL: http://sourceforge.net/apps/mediawiki/procexp/index.php?title=Main_Page
 
-
-#Requires: GAIUS_prerequisites >= 2.0
+Requires: python > 2.6
+Requires: PyQt4 
+Requires: PyQwt
+Requires: python-configobj
+Requires: ethtool
 
 #No automatic dependency stuff
 Autoprov: 0
@@ -37,7 +41,7 @@ Autoreq: 0
 %define __os_install_post %{nil}
 
 %description
-This package contains a process explorer.
+This package contains the Linux Process Explorer.
 
 ###############################################################################
 %prep
