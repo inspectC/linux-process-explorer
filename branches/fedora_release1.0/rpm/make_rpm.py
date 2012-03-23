@@ -66,7 +66,7 @@ subprocess.check_call(["rpmbuild",
    "--define", "_svnversion "  + svnversion, 
    "--define", "_projectname " + projectname, 
    "--define", "_versionprefix " + versionprefix,
-   "--buildarch", "noarch",
+   "--target", "noarch",
    "process_explorer.spec"])
 
 #   "--define", "_pythonpath "  + createFullPath(pythonpath),
