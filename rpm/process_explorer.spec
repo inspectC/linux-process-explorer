@@ -84,7 +84,7 @@ cp -a ../../../procexp $RPM_BUILD_ROOT/opt/%{_projectname}-%{version}-%{release}
 
 ###############################################################################
 %post
-
+chmod +x /opt/%{_projectname}-%{version}-%{release}/procexp/procexp.py
 ln -s /opt/%{_projectname}-%{version}-%{release}/procexp/procexp.py /usr/bin/procexp
 
 ###############################################################################
