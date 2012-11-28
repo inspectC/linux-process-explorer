@@ -27,7 +27,7 @@ BuildRoot: %{_builddir}
 Packager: Carl.Wolff
 URL: http://sourceforge.net/apps/mediawiki/procexp/index.php?title=Main_Page
 
-Requires: schedutils
+Requires: util-linux
 Requires: python > 2.6
 Requires: PyQt4 
 Requires: PyQwt
