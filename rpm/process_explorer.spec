@@ -33,6 +33,7 @@ Requires: PyQt4
 Requires: PyQwt
 Requires: python-configobj
 Requires: ethtool
+Requires: polkit-gnome
 
 #No automatic dependency stuff
 Autoprov: 0
