@@ -422,13 +422,19 @@ def updateUI():
 
     #copy processed to be deleted to the red list      
     for proc in closedProc:
-      redTopLevelItems[proc] = treeProcesses[proc]
+      try:
+        redTopLevelItems[proc] = treeProcesses[proc]
+      except KeyError:
+        pass
      
         
     #color all deleted processed red 
     for proc in redTopLevelItems:
-      for column in xrange(redTopLevelItems[proc].columnCount()):
-        redTopLevelItems[proc].setBackgroundColor(column, QtGui.QColor(255,0,0))
+      try:
+        for column in xrange(redTopLevelItems[proc].columnCount()):
+          redTopLevelItems[proc].setBackgroundColor(column, QtGui.QColor(255,0,0))
+      except RuntimeError:
+        pass 
     
     #update status information about the processes  
     try:
@@ -527,7 +533,6 @@ loadSettings()
 
 timer.start(int(settings["updateTimer"]))  
 
-tcpip_stat.start()
 MainWindow.show()
 
 reader = procreader.reader.procreader(int(settings["updateTimer"]), int(settings["historySampleCount"]))
