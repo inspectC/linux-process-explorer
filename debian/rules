@@ -19,7 +19,7 @@ override_dh_install:
 	dh_install procexp/*.sh /usr/bin
 	dh_install procexp/*.png /usr/share/icons/procexp
 	dh_install procexp/procexp.desktop /usr/share/applications
-	
+	dh_install procexp/com.procexp.pkexec.policy /usr/share/polkit-1/actions
 	
 %:
 	dh $@ 
