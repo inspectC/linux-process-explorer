@@ -23,8 +23,7 @@ override_dh_install:
 	dh_install procexp/com.procexp.pkexec.policy /usr/share/polkit-1/actions
 
 override_dh_fixperms:
-	dh_fixperms
-	chmod +x procexp/rootproxy/procroot.py
+	dh_fixperms -X procroot.py
 	
 %:
 	dh $@ 
