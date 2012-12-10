@@ -35,7 +35,7 @@ svnversion = svn.communicate()[0]
 svnversion = svnversion.strip()
 
 projectname   = "process_explorer"
-versionprefix = "0.3"
+versionprefix = "1.4"
 
 
 def createFullPath(thepathlist):
@@ -50,7 +50,7 @@ pwd = os.getcwd()
 #Create RPM 'environment'
 #
 subprocess.check_call(["/bin/rm", "-rf", "./rpm"])
-subprocess.check_call(["/bin/rm", "-rf", "./i386"])
+subprocess.check_call(["/bin/rm", "-rf", "./noarch"])
 os.mkdir("./rpm")
 os.mkdir("./rpm/BUILD")
 os.mkdir("./rpm/RPMS")
@@ -66,21 +66,14 @@ subprocess.check_call(["rpmbuild",
    "--define", "_svnversion "  + svnversion, 
    "--define", "_projectname " + projectname, 
    "--define", "_versionprefix " + versionprefix,
+   "--target", "noarch",
    "process_explorer.spec"])
 
 #   "--define", "_pythonpath "  + createFullPath(pythonpath),
 
-subprocess.check_call(["mv", pwd + '/rpm/RPMS/i386/'+projectname + '-' + versionprefix + '-' + svnversion + ".i386.rpm", "."])
-
-#create .tar.gz file for rpmless setup..
-
-subprocess.check_call(["tar", "-C", pwd + "/rpm/BUILD/opt", "-cvzf", projectname + '-' + versionprefix + '-' + svnversion + ".tar.gz", projectname + '-' + versionprefix + '-' + svnversion])
-
-
-#remove stuff
-subprocess.check_call(["/bin/rm", "-rf", "./rpm"])
+subprocess.check_call(["mv", pwd + '/rpm/RPMS/noarch/'+projectname + '-' + versionprefix + '-' + svnversion + ".noarch.rpm", "."])
 
 print "********************************************"
-print "RPM file is : " + pwd + '/rpm/RPMS/i386/'+projectname + '-' + versionprefix + '-' + svnversion + ".i386.rpm"
+print "RPM file is : " + pwd + '/rpm/RPMS/noarch/'+projectname + '-' + versionprefix + '-' + svnversion + ".noarch.rpm"
 print "********************************************"
     
