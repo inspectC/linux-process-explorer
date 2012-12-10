@@ -13,6 +13,7 @@ override_dh_install:
 	dh_install procexp/*.py /usr/lib/procexp
 	dh_install procexp/plotobjects/*.py /usr/lib/procexp/plotobjects
 	dh_install procexp/procreader/*.py /usr/lib/procexp/procreader
+	dh_install procexp/rootproxy/*.py /usr/lib/procexp/rootproxy
 	dh_install procexp/ui/*.py /usr/lib/procexp/ui
 	dh_install procexp/ui/*.ui /usr/lib/procexp/ui
 	dh_install procexp/ui/*.png /usr/lib/procexp/ui
