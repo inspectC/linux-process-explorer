@@ -25,15 +25,9 @@ License: GPL
 Group: System Environment/Libraries
 BuildRoot: %{_builddir}
 Packager: Carl.Wolff
-URL: http://sourceforge.net/apps/mediawiki/procexp/index.php?title=Main_Page
 
-Requires: util-linux
-Requires: python > 2.6
-Requires: PyQt4 
-Requires: PyQwt
-Requires: python-configobj
-Requires: ethtool
-Requires: polkit-gnome
+
+#Requires: GAIUS_prerequisites >= 2.0
 
 #No automatic dependency stuff
 Autoprov: 0
@@ -43,7 +37,7 @@ Autoreq: 0
 %define __os_install_post %{nil}
 
 %description
-This package contains the Linux Process Explorer.
+This package contains a process explorer.
 
 ###############################################################################
 %prep
@@ -71,8 +65,22 @@ fi
 rm -f ../../*.rpm
 
 #unpack prerequisites for the process explorer
-pwd
-cp -a ../../../procexp $RPM_BUILD_ROOT/opt/%{_projectname}-%{version}-%{release}
+curdir=`pwd`
+cd ../..
+tar -xf localsmall.tar.gz
+cd $curdir
+
+for file in ../../* ; do
+  if [ "$file" != "../../rpm" ] && [ "$file" != "../../localsmall.tar.gz" ] && [ "$file" != "../../make_rpm.py" ] && [ "$file" != "../../process_explorer.spec" ] ; then 
+    cp -a $file $RPM_BUILD_ROOT/opt/%{_projectname}-%{version}-%{release}
+    echo $file
+    echo "-----"
+  fi
+done
+
+rm -rf ../../bin
+rm -rf ../../lib
+rm -rf ../../qt-453
 
 
 ###############################################################################
@@ -90,13 +98,25 @@ cp -a ../../../procexp $RPM_BUILD_ROOT/opt/%{_projectname}-%{version}-%{release}
 
 ###############################################################################
 %post
-chmod +x /opt/%{_projectname}-%{version}-%{release}/procexp/procexp.py
-ln -s /opt/%{_projectname}-%{version}-%{release}/procexp/procexp.py /usr/bin/procexp
-cp /opt/%{_projectname}-%{version}-%{release}/procexp/com.procexp.pkexec.policy /usr/share/polkit-1/actions/
+
+#install startup script
+
+cat > /opt/%{_projectname}-%{version}-%{release}/processexplorer.sh << __EOF
+#startup script for process explorer
+PREFIX=/opt/%{_projectname}-%{version}-%{release}
+export PATH=\$PREFIX/bin:\$PREFIX/qt-453/bin:\$PATH
+export LD_LIBRARY_PATH=\$PREFIX/lib:\$PREFIX/qt-453/lib:\$LD_LIBRARY_PATH
+export QTDIR=\$PREFIX/qt-453
+export QTLIB=\$PREFIX/qt-453/lib
+export QTINC=\$PREFIX/qt-453/include
+\$PREFIX/bin/python /opt/%{_projectname}-%{version}-%{release}/procexp.py
+__EOF
+
+chmod +x /opt/%{_projectname}-%{version}-%{release}/processexplorer.sh
+ln -s /opt/%{_projectname}-%{version}-%{release}/processexplorer.sh /usr/bin/procexp
 
 ###############################################################################
 %postun
 #No actions needed after the RPM is uninstalled from the target system
 rm -rf /opt/%{_projectname}-%{version}-%{release}
 rm -f /usr/bin/procexp
-rm -f /usr/share/polkit-1/actions/com.procexp.pkexec.policy
